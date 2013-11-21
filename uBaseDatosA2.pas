@@ -9,18 +9,22 @@ type
   TdmBasesDatos = class(TDataModule)
     dbA2: TDBISAMDatabase;
     dbBase: TDBISAMDatabase;
+    dbAyB: TDBISAMDatabase;
   private
     { Private declarations }
   public
     { Public declarations }
     Function ConectarDB( aRuta : string) : Boolean;
+    Function ConectarDbAyB( aRuta : string) : Boolean;
     Procedure CerrarDB;
+    Procedure CerrarDBAyB;
     Function ExisteSEmpresa : Boolean;
     Function RutaEjecucion : String;
   end;
 
 var
   dmBasesDatos: TdmBasesDatos;
+  DirectorioAyB : string;
 
 implementation
 
@@ -37,19 +41,40 @@ begin
   end;
 end;
 
+procedure TdmBasesDatos.CerrarDBAyB;
+begin
+  try
+    dbAyB.Connected := False;
+  except on E: Exception do
+  end;
+end;
+
 function TdmBasesDatos.ConectarDB(aRuta: string): Boolean;
 begin
   try
     CerrarDB;
     dbA2.Directory := aRuta;
-    dbA2.Open();
+    dbA2.Connected := true;
+  except on E: Exception do
+  end;
+end;
+
+function TdmBasesDatos.ConectarDbAyB(aRuta: string): Boolean;
+begin
+  try
+    CerrarDBAyB;
+    dbAyB.Directory := aRuta;
+    dbA2.Connected := true;
   except on E: Exception do
   end;
 end;
 
 function TdmBasesDatos.ExisteSEmpresa : Boolean;
+Var
+  Ruta : string;
 begin
-  Result := FileExists( RutaEjecucion + 'SEmpresas.dat');
+  Ruta := RutaEjecucion;
+  Result := FileExists( Ruta + 'sempresas.dat');
 end;
 
 function TdmBasesDatos.RutaEjecucion: String;
@@ -60,9 +85,11 @@ begin
   Ruta := ExtractFilePath( ParamStr(0));
 
   if ModoPruebas then
-    Ruta := ExtractFilePath( ParametroA2);
+    Ruta := ParametroA2;
 
-  Result := IncludeTrailingBackslash( Ruta);
+  Ruta := IncludeTrailingPathDelimiter( Ruta);
+
+  Result := Ruta;
 end;
 
 end.

@@ -18,4 +18,11 @@ object dmBasesDatos: TdmBasesDatos
     Left = 176
     Top = 32
   end
+  object dbAyB: TDBISAMDatabase
+    EngineVersion = '4.29 Build 1'
+    DatabaseName = 'dbAyB'
+    SessionName = 'Default'
+    Left = 160
+    Top = 128
+  end
 end

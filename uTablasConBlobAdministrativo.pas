@@ -710,7 +710,6 @@ type
       DisplayText: Boolean);
     Procedure GuardarTipoPago( aTabla: TTablasTipoPago; Campo: TCamposTipoPago; Valor : string; Posicion : integer);
     Procedure AbrirSEmpresa;
-    procedure tbFormaPagoBeforeInsert(DataSet: TDataSet);
     procedure CargarTablaFormasPago( aTabla: TDBISAMTable; aCampo : TBlobField);
     procedure GuardarFormasPago( aTabla: TDBISAMTable; var aCampo : TBlobField);
     procedure CargarFormasPago;
@@ -727,7 +726,7 @@ var
 
 implementation
 
-uses Dialogs, uBaseDatosA2;
+uses Dialogs, uBaseDatosA2, uUtilidadesSPA;
 
 {$R *.dfm}
 
@@ -740,7 +739,7 @@ var
   S : TStream;
   I : integer;
 begin
-  S := sOperacionInv.CreateBlobStream(aCampo, bmWrite) ;
+  S := aTabla.CreateBlobStream(aCampo, bmWrite) ;
   I := 0;
 
   tbFormaPago.First;
@@ -917,18 +916,14 @@ begin
   end;
 end;
 
-procedure TdmAdministrativo.tbFormaPagoBeforeInsert(DataSet: TDataSet);
-begin
-
-end;
 
 // Carga los campos FX_Costos
 procedure TdmAdministrativo.AbrirSEmpresa;
 begin
 
   dmBasesDatos.dbBase.Connected := False;
-  dmBasesDatos.dbBase.Directory := IncludeTrailingBackslash( dmBasesDatos.RutaEjecucion);
-ShowMessaje( dmBasesDatos.dbBase.Directory );
+
+  dmBasesDatos.dbBase.Directory := dmBasesDatos.RutaEjecucion;
 
   dmBasesDatos.dbBase.Connected := True;
 

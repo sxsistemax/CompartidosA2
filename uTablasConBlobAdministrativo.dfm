@@ -3996,7 +3996,6 @@ object dmAdministrativo: TdmAdministrativo
   end
   object tbFormaPago: TJvMemoryData
     FieldDefs = <>
-    BeforeInsert = tbFormaPagoBeforeInsert
     AfterInsert = tbFormaPagoAfterInsert
     Left = 40
     Top = 296
@@ -4098,7 +4097,7 @@ object dmAdministrativo: TdmAdministrativo
     end
   end
   object a2Transacciones: TDBISAMTable
-    DatabaseName = 'dbA2'
+    DatabaseName = 'dbAyB'
     EngineVersion = '4.29 Build 1'
     TableName = 'A2TRANSACCIONES'
     Left = 448
