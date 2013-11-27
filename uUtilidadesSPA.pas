@@ -16,7 +16,7 @@ function NombreAplicacion : string;
 
 implementation
 
-Uses Dialogs, SysUtils, IniFiles;
+Uses Dialogs, SysUtils, IniFiles, Registry;
 
 // Retorna el numero de la opcion para ser ejecutado, si el parametro de ejecucion
 // no es válido debe retornar 0
@@ -55,9 +55,9 @@ End;
 
 procedure GuardarConfiguracion( aClave, aValor : String);
 var
-  i : TIniFile;
+  i : TRegistryIniFile;
 begin
-  i :=  TIniFile.Create(NombreAplicacion + '.ini') ;
+  i :=  TRegistryIniFile.Create('SPA\' + NombreAplicacion) ;
   try
     i.WriteString('Configuracion', aClave, aValor);
   except on E: Exception do
@@ -67,13 +67,13 @@ end;
 
 function LeerConfiguracion( aClave : string): string;
 var
-  i : TIniFile;
+  i : TRegistryIniFile;
   s : string;
 begin
   s := '';
-  i :=  TIniFile.Create(NombreAplicacion + '.ini') ;
+  i :=  TRegistryIniFile.Create('SPA\' + NombreAplicacion) ;
   try
-    i.ReadString('Configuracion', aClave, '');
+    S := i.ReadString('Configuracion', aClave, '');
   except on E: Exception do
   end;
 

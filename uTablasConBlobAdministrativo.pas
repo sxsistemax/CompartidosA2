@@ -581,49 +581,6 @@ type
     SPLANTILLAVENTASDETALLEFDP_CODEPRESENTA: TStringField;
     SPLANTILLAVENTASDETALLEFDP_ORIGENAUTO: TIntegerField;
     SPLANTILLAVENTASDETALLEFDP_FACTORPRESENTA: TFloatField;
-    sEmpresa: TDBISAMTable;
-    sEmpresaFE_CODIGO: TAutoIncField;
-    sEmpresaFE_DESCRIPCION: TStringField;
-    sEmpresaFE_STATUS: TBooleanField;
-    sEmpresaFE_UBICACION: TStringField;
-    sEmpresaFE_SIGLAS: TStringField;
-    sEmpresaFE_NIT: TStringField;
-    sEmpresaFE_RIF: TStringField;
-    sEmpresaFE_DIRECCION1: TMemoField;
-    sEmpresaFE_DIRECCION2: TMemoField;
-    sEmpresaFE_TELEFONO: TStringField;
-    sEmpresaFE_TELEFAX: TStringField;
-    sEmpresaFE_EMAIL: TStringField;
-    sEmpresaFE_WEBSITE: TStringField;
-    sEmpresaFE_LOGO: TGraphicField;
-    sEmpresaFE_DIRDATOS: TStringField;
-    sEmpresaFE_DIRHISTORIA: TStringField;
-    sEmpresaFE_DIRSISTEMA: TStringField;
-    sEmpresaFE_DIRFORMAS: TStringField;
-    sEmpresaFE_DIRFORMATOS: TStringField;
-    sEmpresaFE_DIRREPORTES: TStringField;
-    sEmpresaFE_DIRLOCAL: TStringField;
-    sEmpresaFE_LOGO2: TBlobField;
-    sEmpresaFE_ESTADISTICAS: TBlobField;
-    sEmpresaFE_DIRCONTABILIDAD: TStringField;
-    sEmpresaFE_EMPRESAACTIVA: TStringField;
-    sEmpresaFE_DIRMANAGER: TStringField;
-    sEmpresaFE_REPRESENTANTE: TStringField;
-    sEmpresaFE_RIFREPRESENTANTE: TStringField;
-    sEmpresaFE_TIPOCONEXION: TBooleanField;
-    sEmpresaFE_HOSTNAME: TStringField;
-    sEmpresaFE_MAINPORT: TIntegerField;
-    sEmpresaFE_MAINIP: TStringField;
-    sEmpresaFE_ADMINPORT: TIntegerField;
-    sEmpresaFE_ADMINIP: TStringField;
-    sEmpresaFE_TIMEOUT: TIntegerField;
-    sEmpresaFE_ACTIVEPING: TBooleanField;
-    sEmpresaFE_PINGINTERVAL: TIntegerField;
-    sEmpresaFE_COMPRESSION: TSmallintField;
-    sEmpresaFE_USERADM: TStringField;
-    sEmpresaFE_PASSWORDADM: TStringField;
-    sEmpresaFE_USERBD: TStringField;
-    sEmpresaFE_PASSWORDBD: TStringField;
     tbFormaPago: TJvMemoryData;
     tbFormaPagoTipoPago: TIntegerField;
     tbFormaPagoBancoTarjeta: TStringField;
@@ -637,12 +594,8 @@ type
     tbTiposFormaPagoNombreTipoPago: TStringField;
     tbFormaPagoNombreTipoPago: TStringField;
     SInstitucion: TDBISAMTable;
-    SInstitucionFIF_CODIGO: TAutoIncField;
-    SInstitucionFIF_DESCRIPCION: TStringField;
     tbFormaPagoInstitucion: TStringField;
     Starjetas: TDBISAMTable;
-    StarjetasFTJ_CODIGO: TAutoIncField;
-    StarjetasFTJ_DESCRIPCION: TStringField;
     tbFormaPagoTarjeta: TStringField;
     a2Transacciones: TDBISAMTable;
     a2TransaccionesFTR_AUTO: TAutoIncField;
@@ -709,7 +662,6 @@ type
     procedure GetTipoPago(Sender: TField; var Text: string;
       DisplayText: Boolean);
     Procedure GuardarTipoPago( aTabla: TTablasTipoPago; Campo: TCamposTipoPago; Valor : string; Posicion : integer);
-    Procedure AbrirSEmpresa;
     procedure CargarTablaFormasPago( aTabla: TDBISAMTable; aCampo : TBlobField);
     procedure GuardarFormasPago( aTabla: TDBISAMTable; var aCampo : TBlobField);
     procedure CargarFormasPago;
@@ -719,6 +671,8 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure AbrirSInstitucion;
+    procedure AbrirSTarjeta;
   end;
 
 var
@@ -810,6 +764,26 @@ end;
 procedure TdmAdministrativo.sOperacionInvBeforeOpen(DataSet: TDataSet);
 begin
   CargarFormasPago;
+end;
+
+procedure TdmAdministrativo.AbrirSInstitucion;
+begin
+  try
+    if SInstitucion.Active then
+      SInstitucion.Close;
+    SInstitucion.Open;
+  except
+  end;
+end;
+
+procedure TdmAdministrativo.AbrirSTarjeta;
+begin
+  try
+    if Starjetas.Active then
+      Starjetas.Close;
+    Starjetas.Open;
+  except
+  end;
 end;
 
 procedure TdmAdministrativo.CargarFormasPago;
@@ -918,17 +892,6 @@ end;
 
 
 // Carga los campos FX_Costos
-procedure TdmAdministrativo.AbrirSEmpresa;
-begin
-
-  dmBasesDatos.dbBase.Connected := False;
-
-  dmBasesDatos.dbBase.Directory := dmBasesDatos.RutaEjecucion;
-
-  dmBasesDatos.dbBase.Connected := True;
-
-  sEmpresa.Open;
-end;
 
 procedure TdmAdministrativo.GetCosto(Sender: TField;
   var Text: string; DisplayText: Boolean);
