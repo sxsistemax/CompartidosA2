@@ -2,6 +2,16 @@ unit uUtilidadesSPA;
 
 interface
 
+type
+  // Tipos utilizados para identificadores de campos en las tablas
+
+  tTransaccionesOperacionesInv = ( toiNinguna,
+    toiTraslados, toiCargos, toiDescargos, toiAjustes,
+    toiOrdenesCompra, toiCompras, toiDevoluciónCompras,
+    toiNotasEntregasCompra, toiPresupuestos, toiPedidos,
+    toiFacturas, toiDevoluciónVentas, toiNotasEntregasVentas,
+    toiApartados, toiOrdenesServicios );
+
 var
   OpcionA2 : Integer;
   ParametroA2 : string;
@@ -25,6 +35,8 @@ Begin
   ParametroA2 := '';
   OpcionA2 := 0;
   ModoPruebas := False;
+
+  OpcionParametro := 0;
 
   if ParamCount <= 0  then
   begin

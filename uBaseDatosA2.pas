@@ -111,7 +111,7 @@ begin
     CerrarDB;
     dbA2.Directory := aRuta;
     dbA2.Connected := true;
-  except on E: Exception do
+  except
   end;
 end;
 
@@ -121,7 +121,7 @@ begin
     CerrarDBAyB;
     dbAyB.Directory := aRuta;
     dbA2.Connected := true;
-  except on E: Exception do
+  except
   end;
 end;
 
