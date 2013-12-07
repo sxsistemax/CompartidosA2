@@ -4,6 +4,7 @@ object dmBasesDatos: TdmBasesDatos
   Width = 402
   object dbA2: TDBISAMDatabase
     EngineVersion = '4.29 Build 1'
+    Connected = True
     DatabaseName = 'dbA2'
     Directory = 'C:\DB\Pastizeria\a2HAC_Expansion\Empre001\Data'
     SessionName = 'Default'

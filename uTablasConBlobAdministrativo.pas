@@ -6,6 +6,8 @@ uses
   SysUtils, Classes, DB, dbisamtb, JvMemoryDataset;
 
 type
+  tFormasPago = (fpEfectivo, fpCheque, fpTarjetaDebito, fpTarjetaCredito,
+                  fpGiros, fpPagoAdelantado, fpRetencion);
 
   // Tabla SFixed, Campo FX_COSTOS
   TUnPrecio =  Record
@@ -786,6 +788,8 @@ begin
   end;
 end;
 
+
+
 procedure TdmAdministrativo.CargarFormasPago;
 begin
 {
@@ -803,39 +807,39 @@ begin
   end;
 
   tbTiposFormaPago.EmptyTable;
-
+                                 
   tbTiposFormaPago.Append;
-  tbTiposFormaPagoTipoPago.Value := 0;
+  tbTiposFormaPagoTipoPago.Value := Integer(fpEfectivo);
   tbTiposFormaPagoNombreTipoPago.Value := 'Efectivo';
   tbTiposFormaPago.Post;
 
   tbTiposFormaPago.Append;
-  tbTiposFormaPagoTipoPago.Value := 1;
+  tbTiposFormaPagoTipoPago.Value := Integer(fpCheque);
   tbTiposFormaPagoNombreTipoPago.Value := 'Cheque';
   tbTiposFormaPago.Post;
 
   tbTiposFormaPago.Append;
-  tbTiposFormaPagoTipoPago.Value := 2;
+  tbTiposFormaPagoTipoPago.Value := Integer(fpTarjetaDebito);
   tbTiposFormaPagoNombreTipoPago.Value := 'Tarjeta Debito';
   tbTiposFormaPago.Post;
 
   tbTiposFormaPago.Append;
-  tbTiposFormaPagoTipoPago.Value := 3;
+  tbTiposFormaPagoTipoPago.Value := Integer( fpTarjetaCredito);
   tbTiposFormaPagoNombreTipoPago.Value := 'Tarjeta Credito';
   tbTiposFormaPago.Post;
 
   tbTiposFormaPago.Append;
-  tbTiposFormaPagoTipoPago.Value := 4;
+  tbTiposFormaPagoTipoPago.Value := Integer( fpGiros);
   tbTiposFormaPagoNombreTipoPago.Value := 'Giros';
   tbTiposFormaPago.Post;
 
   tbTiposFormaPago.Append;
-  tbTiposFormaPagoTipoPago.Value := 5;
+  tbTiposFormaPagoTipoPago.Value := Integer( fpPagoAdelantado);
   tbTiposFormaPagoNombreTipoPago.Value := 'Pago Adelantado';
   tbTiposFormaPago.Post;
 
   tbTiposFormaPago.Append;
-  tbTiposFormaPagoTipoPago.Value := 6;
+  tbTiposFormaPagoTipoPago.Value := Integer( fpRetencion);
   tbTiposFormaPagoNombreTipoPago.Value := 'Retencion';
   tbTiposFormaPago.Post;
 
