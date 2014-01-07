@@ -1,6 +1,6 @@
 object dmAdministrativo: TdmAdministrativo
   OldCreateOrder = False
-  Height = 407
+  Height = 505
   Width = 608
   object sFixed: TDBISAMTable
     DatabaseName = 'dbA2'
@@ -451,15 +451,15 @@ object dmAdministrativo: TdmAdministrativo
       OnGetText = GetCosto
       Calculated = True
     end
-    object sFixedExento1: TBooleanField
-      FieldKind = fkCalculated
-      FieldName = 'Exento1'
-      OnGetText = GetCosto
-      Calculated = True
-    end
     object sFixedPorcentajeImpuesto2: TBooleanField
       FieldKind = fkCalculated
       FieldName = 'PorcentajeImpuesto2'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object sFixedExento1: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'Exento1'
       OnGetText = GetCosto
       Calculated = True
     end
@@ -4076,5 +4076,130 @@ object dmAdministrativo: TdmAdministrativo
       FieldName = 'FTR_CCOSTODESC'
       Size = 60
     end
+  end
+  object tbCostos: TJvMemoryData
+    FieldDefs = <>
+    LoadStructure = True
+    LoadRecords = True
+    Left = 80
+    Top = 408
+    object tbCostosCodigoCompra: TStringField
+      FieldName = 'CodigoCompra'
+      Size = 50
+    end
+    object tbCostosVImpuesto1: TBooleanField
+      FieldName = 'VImpuesto1'
+    end
+    object tbCostosVImpuesto2: TBooleanField
+      FieldName = 'VImpuesto2'
+    end
+    object tbCostosCostoAnterior: TFloatField
+      FieldName = 'CostoAnterior'
+    end
+    object tbCostosCostoAnteriorEx: TFloatField
+      FieldName = 'CostoAnteriorEx'
+    end
+    object tbCostosCostoActual: TFloatField
+      FieldName = 'CostoActual'
+    end
+    object tbCostosCostoActualEx: TFloatField
+      FieldName = 'CostoActualEx'
+    end
+    object tbCostosCostoPromedio: TFloatField
+      FieldName = 'CostoPromedio'
+    end
+    object tbCostosCostoPromedioEx: TFloatField
+      FieldName = 'CostoPromedioEx'
+    end
+    object tbCostosmImpuesto1: TFloatField
+      FieldName = 'mImpuesto1'
+    end
+    object tbCostosmImpuesto2: TFloatField
+      FieldName = 'mImpuesto2'
+    end
+    object tbCostosPorcentajeImpuesto1: TBooleanField
+      FieldName = 'PorcentajeImpuesto1'
+    end
+    object tbCostosPorcentajeImpuesto2: TBooleanField
+      FieldName = 'PorcentajeImpuesto2'
+    end
+    object tbCostosExento1: TBooleanField
+      FieldName = 'Exento1'
+    end
+    object tbCostosExento2: TBooleanField
+      FieldName = 'Exento2'
+    end
+    object tbCostosFechaVencimiento: TDateTimeField
+      FieldName = 'FechaVencimiento'
+    end
+    object tbCostosNumeroDeLote: TStringField
+      FieldName = 'NumeroDeLote'
+      Size = 42
+    end
+    object tbCostosCostoReferencia: TFloatField
+      FieldName = 'CostoReferencia'
+    end
+  end
+  object tbPrecios: TJvMemoryData
+    FieldDefs = <>
+    Left = 176
+    Top = 408
+    object tbPreciosPorentajeUtilidad: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'PorentajeUtilidad'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object tbPreciosPorentajeUtilidadEx: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'PorentajeUtilidadEx'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object tbPreciosUtilidad: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'Utilidad'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object tbPreciosUtilidadEx: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'UtilidadEx'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object tbPreciosSinImpuesto: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'SinImpuesto'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object tbPreciosMtoImpuesto1: TFloatField
+      FieldName = 'MtoImpuesto1'
+    end
+    object tbPreciosMtoImpuesto2: TFloatField
+      FieldName = 'MtoImpuesto2'
+    end
+    object tbPreciosPrecio: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'Precio'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object tbPreciosPrecioEx: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'PrecioEx'
+      OnGetText = GetCosto
+      Calculated = True
+    end
+    object tbPreciosTipoRound: TSmallintField
+      FieldName = 'TipoRound'
+    end
+  end
+  object DataSource1: TDataSource
+    AutoEdit = False
+    DataSet = tbCostos
+    Left = 400
+    Top = 384
   end
 end

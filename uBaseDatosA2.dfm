@@ -6,7 +6,7 @@ object dmBasesDatos: TdmBasesDatos
     EngineVersion = '4.29 Build 1'
     Connected = True
     DatabaseName = 'dbA2'
-    Directory = 'C:\DB\Pastizeria\a2HAC_Expansion\Empre001\Data'
+    Directory = 'C:\DB\Estructuras\a2Softway\Empre001\Data'
     SessionName = 'Default'
     Left = 64
     Top = 32

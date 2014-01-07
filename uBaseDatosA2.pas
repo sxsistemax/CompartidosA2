@@ -109,7 +109,10 @@ function TdmBasesDatos.ConectarDB(aRuta: string): Boolean;
 begin
   try
     CerrarDB;
-    dbA2.Directory := aRuta;
+    if FileExists(aRuta + '.') then
+      dbA2.Directory := aRuta
+    else
+      dbA2.Directory := RutaEjecucion + aRuta;
     dbA2.Connected := true;
   except
   end;

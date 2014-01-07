@@ -23,8 +23,6 @@ type
      TipoRound       :  Byte;
   end;
 
-  TPrecios =  Array[1..6] of TUnPrecio;
-
   TCostos = Record
     CodeCompra       :  String[50];
     VImpuesto1         ,
@@ -44,7 +42,7 @@ type
     FechaVencimiento    : TDateTime;
     NumeroDeLote        : String[42];
     CostoReferencia     : Double;
-    Precios             : TPrecios;
+    Precios             : Array[1..6] of TUnPrecio;
   end;
   // Fin SFixed
 
@@ -659,13 +657,46 @@ type
     a2TransaccionesFTR_REPARTIDOR: TStringField;
     a2TransaccionesFTR_CCOSTO: TStringField;
     a2TransaccionesFTR_CCOSTODESC: TStringField;
+    tbCostos: TJvMemoryData;
+    tbPrecios: TJvMemoryData;
+    tbPreciosPrecio: TFloatField;
+    tbPreciosPrecioEx: TFloatField;
+    tbPreciosPorentajeUtilidad: TBooleanField;
+    tbPreciosPorentajeUtilidadEx: TBooleanField;
+    tbPreciosUtilidad: TFloatField;
+    tbPreciosUtilidadEx: TFloatField;
+    tbPreciosSinImpuesto: TFloatField;
+    tbPreciosMtoImpuesto1: TFloatField;
+    tbPreciosMtoImpuesto2: TFloatField;
+    tbPreciosTipoRound: TSmallintField;
+    DataSource1: TDataSource;
+    tbCostosCostoPromedio: TFloatField;
+    tbCostosCodigoCompra: TStringField;
+    tbCostosVImpuesto1: TBooleanField;
+    tbCostosVImpuesto2: TBooleanField;
+    tbCostosCostoAnterior: TFloatField;
+    tbCostosCostoAnteriorEx: TFloatField;
+    tbCostosCostoActualEx: TFloatField;
+    tbCostosCostoPromedioEx: TFloatField;
+    tbCostosmImpuesto1: TFloatField;
+    tbCostosmImpuesto2: TFloatField;
+    tbCostosPorcentajeImpuesto1: TBooleanField;
+    tbCostosPorcentajeImpuesto2: TBooleanField;
+    tbCostosExento1: TBooleanField;
+    tbCostosExento2: TBooleanField;
+    tbCostosFechaVencimiento: TDateTimeField;
+    tbCostosNumeroDeLote: TStringField;
+    tbCostosCostoReferencia: TFloatField;
+    tbCostosCostoActual: TFloatField;
     procedure GetCosto(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure GetTipoPago(Sender: TField; var Text: string;
       DisplayText: Boolean);
-    Procedure GuardarTipoPago( aTabla: TTablasTipoPago; Campo: TCamposTipoPago; Valor : string; Posicion : integer);
+    //Procedure GuardarTipoPago( aTabla: TTablasTipoPago; Campo: TCamposTipoPago; Valor : string; Posicion : integer);
     procedure CargarTablaFormasPago( aTabla: TDBISAMTable; aCampo : TBlobField);
     procedure GuardarFormasPago( aTabla: TDBISAMTable; var aCampo : TBlobField);
+    procedure CargarTablaCostos( aTabla: TDBISAMTable; aCampo : TBlobField);
+    procedure GuardarCostos( aTabla: TDBISAMTable; var aCampo : TBlobField);
     procedure CargarFormasPago;
     procedure sOperacionInvBeforeOpen(DataSet: TDataSet);
     procedure tbFormaPagoAfterInsert(DataSet: TDataSet);
@@ -675,6 +706,7 @@ type
     { Public declarations }
     procedure AbrirSInstitucion;
     procedure AbrirSTarjeta;
+    procedure AbrirSFixed;
   end;
 
 var
@@ -687,6 +719,128 @@ uses Dialogs, uBaseDatosA2, uUtilidadesSPA;
 {$R *.dfm}
 
 { TDataModule1 }
+
+// Guarda los costos
+procedure TdmAdministrativo.GuardarCostos(aTabla: TDBISAMTable;
+  var aCampo: TBlobField);
+var
+  R : TCostos;
+  S : TStream;
+  I : integer;
+begin
+  S := aTabla.CreateBlobStream(aCampo, bmWrite) ;
+  I := 0;
+
+  R.CodeCompra := tbCostosCodigoCompra.Value;
+  R.VImpuesto1 := tbCostosVImpuesto1.Value;
+  R.VImpuesto2 := tbCostosVImpuesto2.Value;
+  R.CostoAnteriorBs := tbCostosCostoAnterior.Value;
+  R.CostoAnteriorEx := tbCostosCostoAnteriorEx.Value;
+  R.CostoActualBs := tbCostosCostoActual.Value;
+  R.CostoActualEx := tbCostosCostoActualEx.Value;
+  R.CostoPromedioBs := tbCostosCostoPromedio.Value;
+  R.CostoPromedioEx := tbCostosCostoPromedioEx.Value;
+  R.MImpuesto1 := tbCostosmImpuesto1.Value;
+  R.MImpuesto2 := tbCostosmImpuesto2.Value;
+  R.PorcentImp1 := tbCostosPorcentajeImpuesto1.Value;
+  R.PorcentImp2 := tbCostosPorcentajeImpuesto2.Value;
+  R.Exento1 := tbCostosExento1.Value;
+  R.Excnto2 := tbCostosExento2.Value;
+  R.FechaVencimiento := tbCostosFechaVencimiento.Value;
+  R.NumeroDeLote := tbCostosNumeroDeLote.Value;
+  R.CostoReferencia := tbCostosCostoReferencia.Value;
+
+  tbCostos.First;
+  while not tbCostos.Eof do
+  begin
+    R.Precios[i].PorcUtil := tbPreciosPorentajeUtilidad.Value;
+    R.Precios[i].PorcUtilEx := tbPreciosPorentajeUtilidadEx.Value;
+    R.Precios[i].Utilidad := tbPreciosUtilidad.Value;
+    R.Precios[i].UtilidadEx := tbPreciosUtilidadEx.Value;
+    R.Precios[i].SinImpuesto := tbPreciosSinImpuesto.Value;
+    R.Precios[i].MtoImpuesto1 := tbPreciosMtoImpuesto1.value;
+    R.Precios[i].MtoImpuesto2 := tbPreciosMtoImpuesto2.value;
+    R.Precios[i].TotalPrecio := tbPreciosPrecio.Value;
+    R.Precios[i].TotalPrecioEx := tbPreciosPrecioEx.Value;
+    R.Precios[i].TipoRound := tbPreciosTipoRound.Value;
+    tbCostos.Next;
+    inc(I);
+  end;
+
+  S.Write(R,SizeOf(R)) ;
+end;
+
+// Carga la tabla del Costo
+procedure TdmAdministrativo.CargarTablaCostos(aTabla: TDBISAMTable;
+  aCampo: TBlobField);
+var
+  R : TCostos;
+  S : TStream;
+  X : Integer;
+  blobF : TBlobField;
+begin
+  tbCostos.Close;
+  tbCostos.Open;
+
+  tbPrecios.Close;
+  tbPrecios.Open;
+
+  blobF := aCampo;
+  S := aTabla.CreateBlobStream(blobF, bmRead) ;
+  try
+    S.Read(R,sizeof(R)) ;
+
+    // Carga el costo
+    tbCostos.Append;
+    tbCostosCodigoCompra.Value := R.CodeCompra;
+    tbCostosVImpuesto1.Value := R.VImpuesto1;
+    tbCostosVImpuesto2.Value := R.VImpuesto2;
+    tbCostosCostoAnterior.Value := R.CostoAnteriorBs;
+    tbCostosCostoAnteriorEx.Value := R.CostoAnteriorEx;
+    tbCostosCostoActual.Value := R.CostoActualBs;
+    tbCostosCostoActualEx.Value := R.CostoActualEx;
+    tbCostosCostoPromedio.Value := R.CostoPromedioBs;
+    tbCostosCostoPromedioEx.Value := R.CostoPromedioEx;
+    tbCostosmImpuesto1.Value := R.MImpuesto1;
+    tbCostosmImpuesto2.Value := R.MImpuesto2;
+    tbCostosPorcentajeImpuesto1.Value := R.PorcentImp1;
+    tbCostosPorcentajeImpuesto2.Value := R.PorcentImp2;
+    tbCostosExento1.Value := R.Exento1;
+    tbCostosExento2.Value := R.Excnto2;
+    tbCostosFechaVencimiento.Value := R.FechaVencimiento;
+    tbCostosNumeroDeLote.Value := R.NumeroDeLote;
+    tbCostosCostoReferencia.Value := R.CostoReferencia;
+
+    tbCostos.Post;
+
+    x := 1;
+
+    while x <= 6 do
+    begin
+      tbPrecios.Append;
+
+      tbPreciosPorentajeUtilidad.Value := R.Precios[x].PorcUtil;
+      tbPreciosPorentajeUtilidadEx.Value := R.Precios[x].PorcUtilEx;
+      tbPreciosUtilidad.Value := R.Precios[x].Utilidad;
+      tbPreciosUtilidadEx.Value := R.Precios[x].UtilidadEx;
+      tbPreciosSinImpuesto.Value := R.Precios[x].SinImpuesto;
+      tbPreciosMtoImpuesto1.value := R.Precios[x].MtoImpuesto1;
+      tbPreciosMtoImpuesto2.value := R.Precios[x].MtoImpuesto2;
+      tbPreciosPrecio.Value := R.Precios[x].TotalPrecio;
+      tbPreciosPrecioEx.Value := R.Precios[x].TotalPrecioEx;
+      tbPreciosTipoRound.Value := R.Precios[x].TipoRound;
+
+      tbPrecios.Post;
+
+      Inc(x);
+    end;
+
+  except
+    S.Free;
+  end;
+
+end;
+
 // Guarda el TipoPago
 procedure TdmAdministrativo.GuardarFormasPago(aTabla: TDBISAMTable;
   var aCampo: TBlobField);
@@ -696,7 +850,7 @@ var
   I : integer;
 begin
   S := aTabla.CreateBlobStream(aCampo, bmWrite) ;
-  I := 0;
+  I := 1;
 
   tbFormaPago.First;
   while not tbFormaPago.Eof do
@@ -715,6 +869,46 @@ begin
   S.Write(R,SizeOf(R)) ;
 end;
 
+procedure TdmAdministrativo.CargarTablaFormasPago(aTabla: TDBISAMTable;
+  aCampo: TBlobField);
+var
+  R : TFormasDePago;
+  S : TStream;
+  blobF : TBlobField;
+  I : Integer;
+begin
+  tbFormaPago.Open;
+
+  tbFormaPago.EmptyTable;
+
+  blobF := aCampo;
+  S := aTabla.CreateBlobStream(blobF, bmRead) ;
+  try
+    S.Read(R,sizeof(R)) ;
+    for I := 0 to 9 do
+    begin
+      tbFormaPago.Append;
+
+      tbFormaPagoTipoPago.Value := R[I].TipoPago;
+      tbFormaPagoBancoTarjeta.Value := R[I].BancoTarjeta;
+      tbFormaPagoDetalle.Value := R[I].Detalle;
+      tbFormaPagoRetencionIVA.Value := R[I].RetencionIVA;
+      tbFormaPagoMontoMonedaVieja.Value := R[I].MontoBsViejos;
+      tbFormaPagoMontoPago.Value := R[I].MontoPago;
+      tbFormaPagoNoEsEfectivo.Value := R[I].NoEsEfectivo;
+
+      tbFormaPago.Post;
+    end;
+
+  except
+    S.Free;
+  end;
+
+end;
+
+
+
+{
 Procedure TdmAdministrativo.GuardarTipoPago( aTabla: TTablasTipoPago; Campo: TCamposTipoPago; Valor : string; Posicion : integer);
 var
   R : TFormasDePago;
@@ -761,11 +955,22 @@ begin
     S.Free;
   end;
 end;
-
+}
 
 procedure TdmAdministrativo.sOperacionInvBeforeOpen(DataSet: TDataSet);
 begin
   CargarFormasPago;
+end;
+
+procedure TdmAdministrativo.AbrirSFixed;
+begin
+  try
+    if sFixed.Active then
+      sFixed.Close;
+    sFixed.Open;
+  except
+  end;
+
 end;
 
 procedure TdmAdministrativo.AbrirSInstitucion;
@@ -807,7 +1012,7 @@ begin
   end;
 
   tbTiposFormaPago.EmptyTable;
-                                 
+
   tbTiposFormaPago.Append;
   tbTiposFormaPagoTipoPago.Value := Integer(fpEfectivo);
   tbTiposFormaPagoNombreTipoPago.Value := 'Efectivo';
@@ -842,43 +1047,6 @@ begin
   tbTiposFormaPagoTipoPago.Value := Integer( fpRetencion);
   tbTiposFormaPagoNombreTipoPago.Value := 'Retencion';
   tbTiposFormaPago.Post;
-
-end;
-
-procedure TdmAdministrativo.CargarTablaFormasPago(aTabla: TDBISAMTable;
-  aCampo: TBlobField);
-var
-  R : TFormasDePago;
-  S : TStream;
-  blobF : TBlobField;
-  I : Integer;
-begin
-  tbFormaPago.Open;
-
-  tbFormaPago.EmptyTable;
-
-  blobF := aCampo;
-  S := aTabla.CreateBlobStream(blobF, bmRead) ;
-  try
-    S.Read(R,sizeof(R)) ;
-    for I := 0 to 9 do
-    begin
-      tbFormaPago.Append;
-
-      tbFormaPagoTipoPago.Value := R[I].TipoPago;
-      tbFormaPagoBancoTarjeta.Value := R[I].BancoTarjeta;
-      tbFormaPagoDetalle.Value := R[I].Detalle;
-      tbFormaPagoRetencionIVA.Value := R[I].RetencionIVA;
-      tbFormaPagoMontoMonedaVieja.Value := R[I].MontoBsViejos;
-      tbFormaPagoMontoPago.Value := R[I].MontoPago;
-      tbFormaPagoNoEsEfectivo.Value := R[I].NoEsEfectivo;
-
-      tbFormaPago.Post;
-    end;
-
-  except
-    S.Free;
-  end;
 
 end;
 
