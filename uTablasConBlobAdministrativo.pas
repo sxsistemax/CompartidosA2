@@ -658,17 +658,6 @@ type
     a2TransaccionesFTR_CCOSTO: TStringField;
     a2TransaccionesFTR_CCOSTODESC: TStringField;
     tbCostos: TJvMemoryData;
-    tbPrecios: TJvMemoryData;
-    tbPreciosPrecio: TFloatField;
-    tbPreciosPrecioEx: TFloatField;
-    tbPreciosPorentajeUtilidad: TBooleanField;
-    tbPreciosPorentajeUtilidadEx: TBooleanField;
-    tbPreciosUtilidad: TFloatField;
-    tbPreciosUtilidadEx: TFloatField;
-    tbPreciosSinImpuesto: TFloatField;
-    tbPreciosMtoImpuesto1: TFloatField;
-    tbPreciosMtoImpuesto2: TFloatField;
-    tbPreciosTipoRound: TSmallintField;
     DataSource1: TDataSource;
     tbCostosCostoPromedio: TFloatField;
     tbCostosCodigoCompra: TStringField;
@@ -688,16 +677,221 @@ type
     tbCostosNumeroDeLote: TStringField;
     tbCostosCostoReferencia: TFloatField;
     tbCostosCostoActual: TFloatField;
+    tbCostosCodigo: TStringField;
+    tbPrecios: TJvMemoryData;
+    tbPreciosPorcentajeUtilidad: TBooleanField;
+    tbPreciosPorcentajeUtilidadEx: TBooleanField;
+    tbPreciosUtilidad: TFloatField;
+    tbPreciosUtilidadEx: TFloatField;
+    tbPreciosSinImpuesto: TFloatField;
+    tbPreciosMtoImpuesto1: TFloatField;
+    tbPreciosMtoImpuesto2: TFloatField;
+    tbPreciosPrecio: TFloatField;
+    tbPreciosPrecioEx: TFloatField;
+    tbPreciosTipoRound: TSmallintField;
+    SSistema: TDBISAMTable;
+    SSistemaDUMMYKEY: TStringField;
+    SSistemaNO_APARTADO: TIntegerField;
+    SSistemaNO_FACTURA: TIntegerField;
+    SSistemaNO_FACTURALOTE: TIntegerField;
+    SSistemaNO_PRESUPUESTO: TIntegerField;
+    SSistemaNO_NOTAENTREGA: TIntegerField;
+    SSistemaNO_PEDIDO: TIntegerField;
+    SSistemaNO_DEVOLUCION: TIntegerField;
+    SSistemaNO_TRANSFERENCIAS: TIntegerField;
+    SSistemaNO_CARGOS: TIntegerField;
+    SSistemaNO_DESCARGOS: TIntegerField;
+    SSistemaNO_AJUSTESINV: TIntegerField;
+    SSistemaNO_RECIBOCAJA: TIntegerField;
+    SSistemaNO_PLANILLA: TIntegerField;
+    SSistemaNO_NOTASCREDITO: TIntegerField;
+    SSistemaNO_NOTASDEBITO: TIntegerField;
+    SSistemaNO_NOTASCREDITOPROV: TIntegerField;
+    SSistemaNO_NOTASDEBITOPROV: TIntegerField;
+    SSistemaNO_CONSTANCIARETENCION: TIntegerField;
+    SSistemaNO_REQUISICION: TIntegerField;
+    SSistemaNO_SOLCOTIZA: TIntegerField;
+    SSistemaNO_ORDENCOMPRA: TIntegerField;
+    SSistemaNO_COMPRAS: TIntegerField;
+    SSistemaNO_DEVOLUCIONCOMPRA: TIntegerField;
+    SSistemaNO_NOTAENTREGAPROV: TIntegerField;
+    SSistemaNO_PRXSERIALIZACION: TIntegerField;
+    SSistemaMESES_PRESUPUESTOS: TIntegerField;
+    SSistemaMESES_PEDIDOS: TIntegerField;
+    SSistemaMESES_ORDENESCOMPRA: TIntegerField;
+    SSistemaIMPUESTO1: TStringField;
+    SSistemaIMPUESTO2: TStringField;
+    SSistemaMTO_IMPUESTO1: TCurrencyField;
+    SSistemaMTO_IMPUESTO2: TCurrencyField;
+    SSistemaACTIVAR_IMPUESTO1: TBooleanField;
+    SSistemaACTIVAR_IMPUESTO2: TBooleanField;
+    SSistemaSERIALES_POSTVENTA: TBooleanField;
+    SSistemaSUMARFLETEIMP1VENTAS: TBooleanField;
+    SSistemaSUMARFLETEIMP2VENTAS: TBooleanField;
+    SSistemaSUMARFLETEIMP1COMPRAS: TBooleanField;
+    SSistemaSUMARFLETEIMP2COMPRAS: TBooleanField;
+    SSistemaUTILIZARCTMOSVENTAS: TBooleanField;
+    SSistemaTIEMPOCHEQUEUSUARIOS: TIntegerField;
+    SSistemaTIEMPOINACTIVOAPLICACION: TIntegerField;
+    SSistemaBLOQUEODEUSUARIOS: TIntegerField;
+    SSistemaAPARIENCIA3D: TBooleanField;
+    SSistemaLONGITUDPASSWORD: TIntegerField;
+    SSistemaPORCPRONTOPAGO: TCurrencyField;
+    SSistemaDIASPRONTOPAGO: TIntegerField;
+    SSistemaDECIMALESXDEFECTO: TIntegerField;
+    SSistemaSERIALES_POSTCOMPRA: TBooleanField;
+    SSistemaUTILIZARCTMOSCOMPRAS: TBooleanField;
+    SSistemaREDONDEOVENTAS: TStringField;
+    SSistemaREDONDEOCOMPRAS: TStringField;
+    SSistemaMONEDA_DEFECTO: TStringField;
+    SSistemaACTIVAR_SOMBRA: TBooleanField;
+    SSistemaNOMBRE_PRECIO1: TStringField;
+    SSistemaNOMBRE_PRECIO2: TStringField;
+    SSistemaNOMBRE_PRECIO3: TStringField;
+    SSistemaNOMBRE_PRECIO4: TStringField;
+    SSistemaNOMBRE_PRECIO5: TStringField;
+    SSistemaNOMBRE_PRECIO6: TStringField;
+    SSistemaMTO_IMPUESTO1P: TBooleanField;
+    SSistemaMTO_IMPUESTO2P: TBooleanField;
+    SSistemaPORCPRONTOPAGOP: TBooleanField;
+    SSistemaAUTOCODECATEGORIA: TBooleanField;
+    SSistemaFILLCODECATEGORIA: TBooleanField;
+    SSistemaAUTOCODEINVENTARIO: TBooleanField;
+    SSistemaFILLCODEINVENTARIO: TBooleanField;
+    SSistemaAUTOCODEZONA: TBooleanField;
+    SSistemaFILLCODEZONA: TBooleanField;
+    SSistemaAUTOCODECLIENTE: TBooleanField;
+    SSistemaFILLCODECLIENTE: TBooleanField;
+    SSistemaAUTOCODEVENDEDOR: TBooleanField;
+    SSistemaFILLCODEVENDEDOR: TBooleanField;
+    SSistemaAUTOCODEPROVEEDOR: TBooleanField;
+    SSistemaFILLCODEPROVEEDOR: TBooleanField;
+    SSistemaAUTOCODECONCEPTO: TBooleanField;
+    SSistemaFILLCODECONCEPTO: TBooleanField;
+    SSistemaAUTOCODEBENEFICIARIO: TBooleanField;
+    SSistemaFILLCODEBENEFICIARIO: TBooleanField;
+    SSistemaPRXCODECATEGORIA: TFloatField;
+    SSistemaPRXCODEINVENTARIO: TFloatField;
+    SSistemaPRXCODEZONAS: TFloatField;
+    SSistemaPRXCODECLIENTE: TFloatField;
+    SSistemaPRXCODEVENDEDOR: TFloatField;
+    SSistemaPRXCODEPROVEEDOR: TFloatField;
+    SSistemaPRXCODECONCEPTO: TFloatField;
+    SSistemaPRXCODEBENEFICIARIO: TFloatField;
+    SSistemaDESCUENTOPRONTOPAGO: TBlobField;
+    SSistemaINTERESMORA: TFloatField;
+    SSistemaKEYAPARTADO: TStringField;
+    SSistemaIDENTIDADFISCAL1: TStringField;
+    SSistemaIDENTIDADFISCAL2: TStringField;
+    SSistemaCOMISIONVENTASAFTERCANCEL: TBooleanField;
+    SSistemaFECHA_INICIOPERIODO: TDateField;
+    SSistemaFECHA_FINALPERIODO: TDateField;
+    SSistemaNAMEPERIODO: TStringField;
+    SSistemaDESCRIPCIONPERIODOS: TBlobField;
+    SSistemaESTADANO2000: TStringField;
+    SSistemaESTADANO1999: TStringField;
+    SSistemaESTADANO1998: TStringField;
+    SSistemaFECHA_ULTIMAFACTURA: TDateField;
+    SSistemaMONTO_ULTIMAFACTURA: TCurrencyField;
+    SSistemaCANTIDAD_ULTIMAFACTURA: TCurrencyField;
+    SSistemaAJUSTEDETALLADO: TBooleanField;
+    SSistemaIMP_DEBITOBANCARIO: TFloatField;
+    SSistemaUTILIDADENPORCENTAJE: TBooleanField;
+    SSistemaCERRARCUENTASXCOBRAR: TBooleanField;
+    SSistemaCERRARCUENTASXPAGAR: TBooleanField;
+    SSistemaMESES_HISTORICO: TIntegerField;
+    SSistemaNAMEAUTORIZADOS: TStringField;
+    SSistemaNAMEMATRICES: TStringField;
+    SSistemaNO_COMPROBANTEEGRESO: TIntegerField;
+    SSistemaNO_COMPROBANTEDEBITO: TIntegerField;
+    SSistemaNO_COMPROBANTEDEPOSITO: TIntegerField;
+    SSistemaNO_COMPROBANTECREDITO: TIntegerField;
+    SSistemaDIASDIF_MISMOBANCO: TIntegerField;
+    SSistemaDIASDIF_OTROSBANCOS: TIntegerField;
+    SSistemaDIASDIF_FUERAPLAZA: TIntegerField;
+    SSistemaVERSION_UPDATE: TFloatField;
+    SSistemaNAMEFLETEVENTA: TStringField;
+    SSistemaNAMEFLETECOMPRA: TStringField;
+    SSistemaNAMEGIROS: TStringField;
+    SSistemaNAMECOMISION: TStringField;
+    SSistemaNAMECLASIFICACION: TStringField;
+    SSistemaNAMEPESO: TStringField;
+    SSistemaNAMEEXISTENCIA: TStringField;
+    SSistemaMONTOFLETEDEFECTO: TFloatField;
+    SSistemaSERIECREADAPOR: TStringField;
+    SSistemaTIPOSERIE: TIntegerField;
+    SSistemaNO_ORDENSERVICIO: TIntegerField;
+    SSistemaNO_GUIADESPACHO: TIntegerField;
+    SSistemaSERIALESUNICOS: TBooleanField;
+    SSistemaSERIALESXDEPOSITO: TBooleanField;
+    SSistemaNO_PEDIDOPENDIENTE: TIntegerField;
+    SSistemaNO_LOCKRECORD: TBooleanField;
+    SSistemaNO_USEESTADISTICAS: TBooleanField;
+    SSistemaMAXTRANSBANCO: TIntegerField;
+    SSistemaNO_GRUPOGASTO: TStringField;
+    SSistemaULTFECHACONTABINIT: TDateField;
+    SSistemaULTFECHACONTABFIN: TDateField;
+    SSistemaFORMATOFECHA: TSmallintField;
+    SSistemaNO_RETENCIONPROVEEDOR: TIntegerField;
+    SSistemaNO_RETENCIONESPECIAL: TIntegerField;
+    SSistemaCONTRIBUYENTE_ESPECIAL: TBooleanField;
+    SSistemaCLASIFICACION_RETENCION: TStringField;
+    SSistemaPORCENT_ESPECIAL: TCurrencyField;
+    SSistemaNO_CONTROL: TIntegerField;
+    SSistemaUNASOLARETENCION: TBooleanField;
+    SSistemaNO_CONSECUTIVO: TIntegerField;
+    SSistemaMODO_IVA: TStringField;
+    SSistemaDECIMALES_CANTIDAD: TIntegerField;
+    SSistemaCLASIFICACION_RETENCION_CLIENT: TStringField;
+    SSistemaACTIVAR_CODIGOUNICO: TBooleanField;
+    SSistemaNAMENDCLIENTE: TStringField;
+    SSistemaNAMENDPROVEEDOR: TStringField;
+    SSistemaNAMENCCLIENTE: TStringField;
+    SSistemaNAMENCPROVEEDOR: TStringField;
+    SSistemaABRENDCLIENTE: TStringField;
+    SSistemaABRENDPROVEEDOR: TStringField;
+    SSistemaABRENCCLIENTE: TStringField;
+    SSistemaABRENCPROVEEDOR: TStringField;
+    SSistemaCIERRE_DONE: TBooleanField;
+    SSistemaTIPOCOSTO: TStringField;
+    SSistemaVIGENCIA_CARNET: TIntegerField;
+    SSistemaACTIVE_CUENTASC: TBooleanField;
+    SSistemaACTIVE_CUENTASP: TBooleanField;
+    SSistemaMONEDA_REFERENCIA: TStringField;
+    SSistemaREDONDEOIVA_VENTAS: TBooleanField;
+    SSistemaREDONDEOIVA_COMPRAS: TBooleanField;
+    SSistemaBLOCKAUTODROP: TBooleanField;
+    SSistemaNAME_DETALLE: TStringField;
+    SSistemaNO_RECIBOCAJACHICA: TIntegerField;
+    SSistemaNO_ORDENPAGO: TIntegerField;
+    SSistemaCLASIFICACION_CARGOS: TStringField;
+    SSistemaCLASIFICACION_DESCARGOS: TStringField;
+    SSistemaIGUALARCORRELATIVO: TBooleanField;
+    SSistemaMODORETENCIONVENTA: TBooleanField;
+    SSistemaMODORETENCIONCOMPRA: TBooleanField;
+    SSistemaNO_ORDENENSAMBLE: TIntegerField;
+    SSistemaDEPOSITO_ENSAMBLE: TStringField;
+    SSistemaDEPOSITO_ENSAMBLETRANSITO: TStringField;
+    SSistemaCLASIFICA_ENSAMBLECARGO: TStringField;
+    SSistemaCLASIFICA_ENSAMBLEDESCARGO: TStringField;
+    SSistemaCLASIFICA_ENSAMBLETRASLADO: TStringField;
+    SSistemaIGUALARCORRELATIVOCOMPRA: TBooleanField;
+    SSistemaMOSTRARALLDEPOSITOS: TBooleanField;
+    SSistemaUNIDAD_TRIBUTARIA: TCurrencyField;
+    SSistemaESTADO_NAME: TStringField;
+    SSistemaESTADO_VALUE: TStringField;
+    SSistemaCIUDAD_NAME: TStringField;
+    SSistemaCIUDAD_VALUE: TStringField;
+    SSistemaMUNICIPIO_NAME: TStringField;
+    SSistemaMUNICIPIO_VALUE: TStringField;
+    SSistemaTIPO_PERSONAJURIDICA: TStringField;
+    SSistemaNO_CAUSACION: TIntegerField;
+    SSistemaNO_CAJACHICA: TIntegerField;
+    SSistemaTIPO_CONVENIOVALIDA: TSmallintField;
     procedure GetCosto(Sender: TField; var Text: string;
       DisplayText: Boolean);
     procedure GetTipoPago(Sender: TField; var Text: string;
       DisplayText: Boolean);
-    //Procedure GuardarTipoPago( aTabla: TTablasTipoPago; Campo: TCamposTipoPago; Valor : string; Posicion : integer);
-    procedure CargarTablaFormasPago( aTabla: TDBISAMTable; aCampo : TBlobField);
-    procedure GuardarFormasPago( aTabla: TDBISAMTable; var aCampo : TBlobField);
-    procedure CargarTablaCostos( aTabla: TDBISAMTable; aCampo : TBlobField);
-    procedure GuardarCostos( aTabla: TDBISAMTable; var aCampo : TBlobField);
-    procedure CargarFormasPago;
     procedure sOperacionInvBeforeOpen(DataSet: TDataSet);
     procedure tbFormaPagoAfterInsert(DataSet: TDataSet);
 
@@ -707,6 +901,14 @@ type
     procedure AbrirSInstitucion;
     procedure AbrirSTarjeta;
     procedure AbrirSFixed;
+    procedure AbrirTablasCostos;
+    procedure CargarFormasPago;
+    procedure CargarTablaFormasPago( aTabla: TDBISAMTable; aCampo : TBlobField);
+    procedure GuardarFormasPago( aTabla: TDBISAMTable; var aCampo : TBlobField);
+    procedure CargarTablaCostos( aTabla: TDBISAMTable; aCampo : TBlobField; Codigo: String = '');
+    procedure GuardarCostos( aTabla: TDBISAMTable; var aCampo : TBlobField);
+    procedure CargarCostos( Codigo: string);
+    function GenerarConsecutivo( Campo : string) : string;
   end;
 
 var
@@ -714,7 +916,7 @@ var
 
 implementation
 
-uses Dialogs, uBaseDatosA2, uUtilidadesSPA;
+uses Dialogs, uBaseDatosA2, uUtilidadesSPA, Variants;
 
 {$R *.dfm}
 
@@ -729,7 +931,9 @@ var
   I : integer;
 begin
   S := aTabla.CreateBlobStream(aCampo, bmWrite) ;
-  I := 0;
+  I := 1;
+
+  tbCostos.First;
 
   R.CodeCompra := tbCostosCodigoCompra.Value;
   R.VImpuesto1 := tbCostosVImpuesto1.Value;
@@ -750,11 +954,11 @@ begin
   R.NumeroDeLote := tbCostosNumeroDeLote.Value;
   R.CostoReferencia := tbCostosCostoReferencia.Value;
 
-  tbCostos.First;
-  while not tbCostos.Eof do
+  tbPrecios.First;
+  while not tbPrecios.Eof do
   begin
-    R.Precios[i].PorcUtil := tbPreciosPorentajeUtilidad.Value;
-    R.Precios[i].PorcUtilEx := tbPreciosPorentajeUtilidadEx.Value;
+    R.Precios[i].PorcUtil := tbPreciosPorcentajeUtilidad.Value;
+    R.Precios[i].PorcUtilEx := tbPreciosPorcentajeUtilidadEx.Value;
     R.Precios[i].Utilidad := tbPreciosUtilidad.Value;
     R.Precios[i].UtilidadEx := tbPreciosUtilidadEx.Value;
     R.Precios[i].SinImpuesto := tbPreciosSinImpuesto.Value;
@@ -763,27 +967,25 @@ begin
     R.Precios[i].TotalPrecio := tbPreciosPrecio.Value;
     R.Precios[i].TotalPrecioEx := tbPreciosPrecioEx.Value;
     R.Precios[i].TipoRound := tbPreciosTipoRound.Value;
-    tbCostos.Next;
+    tbPrecios.Next;
     inc(I);
   end;
 
   S.Write(R,SizeOf(R)) ;
+
+  S.Free;
 end;
 
 // Carga la tabla del Costo
 procedure TdmAdministrativo.CargarTablaCostos(aTabla: TDBISAMTable;
-  aCampo: TBlobField);
+  aCampo: TBlobField; Codigo: String = '');
 var
   R : TCostos;
   S : TStream;
   X : Integer;
   blobF : TBlobField;
 begin
-  tbCostos.Close;
-  tbCostos.Open;
-
-  tbPrecios.Close;
-  tbPrecios.Open;
+  AbrirTablasCostos;
 
   blobF := aCampo;
   S := aTabla.CreateBlobStream(blobF, bmRead) ;
@@ -811,6 +1013,8 @@ begin
     tbCostosNumeroDeLote.Value := R.NumeroDeLote;
     tbCostosCostoReferencia.Value := R.CostoReferencia;
 
+    tbCostosCodigo.Value := Codigo;
+
     tbCostos.Post;
 
     x := 1;
@@ -819,8 +1023,8 @@ begin
     begin
       tbPrecios.Append;
 
-      tbPreciosPorentajeUtilidad.Value := R.Precios[x].PorcUtil;
-      tbPreciosPorentajeUtilidadEx.Value := R.Precios[x].PorcUtilEx;
+      tbPreciosPorcentajeUtilidad.Value := R.Precios[x].PorcUtil;
+      tbPreciosPorcentajeUtilidadEx.Value := R.Precios[x].PorcUtilEx;
       tbPreciosUtilidad.Value := R.Precios[x].Utilidad;
       tbPreciosUtilidadEx.Value := R.Precios[x].UtilidadEx;
       tbPreciosSinImpuesto.Value := R.Precios[x].SinImpuesto;
@@ -834,6 +1038,7 @@ begin
 
       Inc(x);
     end;
+    S.Free;
 
   except
     S.Free;
@@ -867,6 +1072,8 @@ begin
   end;
 
   S.Write(R,SizeOf(R)) ;
+
+  S.Free;
 end;
 
 procedure TdmAdministrativo.CargarTablaFormasPago(aTabla: TDBISAMTable;
@@ -900,62 +1107,13 @@ begin
       tbFormaPago.Post;
     end;
 
+
+    S.Free;
   except
     S.Free;
   end;
 
 end;
-
-
-
-{
-Procedure TdmAdministrativo.GuardarTipoPago( aTabla: TTablasTipoPago; Campo: TCamposTipoPago; Valor : string; Posicion : integer);
-var
-  R : TFormasDePago;
-  S : TStream;
-  blobF : TBlobField;
-  I : Integer;
-begin
-//  case aTabla of
-//    SOPERACIONINV:
-//      Begin
-        blobF := sOperacionInv.FieldByName('FTI_FORMADEPAGO') as TBlobField;
-        S := sOperacionInv.CreateBlobStream(blobF, bmRead) ;
-//      End;
-//    SCUENTASXCOBRAR:
-//      begin
-//        blobF := sCuentasXCobrar.FieldByName('FCC_FORMAPAGO') as TBlobField;
-//        S := sCuentasXCobrar.CreateBlobStream(blobF, bmRead) ;
-//      end;
-//    SCUENTASXPAGAR:
-//      begin
-//        blobF := sCuentasxPagar.FieldByName('FCP_FORMAPAGO) as TBlobField;
-//        S := sCuentasxPagar.CreateBlobStream(blobF, bmRead) ;
-//      end;
-//  end;
-
-  try
-    I := 0;
-    while (I <= 9) and (I <= Posicion) do
-    begin
-      case Campo of
-        TipoPago: R[I].TipoPago := StrToInt( Valor);
-        BancoTarjeta: R[I].BancoTarjeta := Valor;
-        Detalle: R[I].Detalle := Valor;
-        RetencionIVA: R[I].RetencionIVA := StrToBool(Valor);
-        MontoMonedaVieja: R[I].MontoBsViejos := StrToFloat( Valor);
-        MontoPago: R[I].MontoPago := StrToFloat( Valor);
-        NoEsEfectivo: R[I].NoEsEfectivo := StrToBool( Valor);
-      end;
-
-    end;
-
-    S.Write( R, SizeOf(R));
-  except
-    S.Free;
-  end;
-end;
-}
 
 procedure TdmAdministrativo.sOperacionInvBeforeOpen(DataSet: TDataSet);
 begin
@@ -994,6 +1152,35 @@ begin
 end;
 
 
+
+procedure TdmAdministrativo.AbrirTablasCostos;
+begin
+  tbCostos.Close;
+  tbPrecios.Close;
+
+  tbCostos.Open;
+  tbPrecios.Open;
+end;
+
+procedure TdmAdministrativo.CargarCostos(Codigo: string);
+begin
+  try
+    AbrirSFixed;
+
+    if not tbCostos.Active then
+      AbrirTablasCostos;
+
+    if ( tbCostosCodigo.Value <> Codigo) then
+    begin
+      if sFixed.Locate('FX_TIPO;FX_CODIGO', varArrayOf(['B', Codigo]), [] ) then
+      begin
+        CargarTablaCostos( SFixed, sFixedFX_COSTOS, Codigo);
+      end;
+    end;
+    
+  except on E: Exception do
+  end;
+end;
 
 procedure TdmAdministrativo.CargarFormasPago;
 begin
@@ -1064,6 +1251,37 @@ end;
 
 
 // Carga los campos FX_Costos
+
+function TdmAdministrativo.GenerarConsecutivo(Campo: string): string;
+var
+  Documento : LongInt;
+
+  function RightStr(Const Str: String; Size: Word): String;
+  begin
+    if Size > Length(Str) then Size := Length(Str) ;
+    RightStr := Copy(Str, Length(Str)-Size+1, Size)
+  end;
+
+begin
+  try
+    if not SSistema.Active then
+      SSistema.Open;
+
+    SSistema.First;
+
+    SSistema.Edit;
+
+    Documento := SSistema.FieldByName(Campo).Value;
+
+    SSistema.FieldByName(Campo).Value := SSistema.FieldByName(Campo).Value + 1;
+
+    SSistema.Post;
+
+    Result := RightStr( StringOfChar('0', 7) + IntToStr(Documento), 8);
+
+  except on E: Exception do
+  end;
+end;
 
 procedure TdmAdministrativo.GetCosto(Sender: TField;
   var Text: string; DisplayText: Boolean);

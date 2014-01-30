@@ -3,7 +3,7 @@ unit uBaseDatosA2;
 interface
 
 uses
-  SysUtils, Classes, DB, dbisamtb;
+  SysUtils, Classes, DB, dbisamtb, Dialogs;
 
 type
   TdmBasesDatos = class(TDataModule)
@@ -79,14 +79,19 @@ uses uUtilidadesSPA;
 
 procedure TdmBasesDatos.AbrirSEmpresa;
 begin
+  try
+    if dbBase.Connected then
+      dbBase.Close;
 
-  dbBase.Connected := False;
+    dbBase.Directory := dmBasesDatos.RutaEjecucion;
 
-  dbBase.Directory := dmBasesDatos.RutaEjecucion;
+    dbBase.Open;
 
-  dbBase.Connected := True;
+    sEmpresa.Open;
 
-  sEmpresa.Open;
+  except on E: Exception do
+    ShowMessage('Ocurrió un error abriendo empresas. ' + E.Message);
+  end;
 end;
 
 procedure TdmBasesDatos.CerrarDB;
@@ -109,7 +114,7 @@ function TdmBasesDatos.ConectarDB(aRuta: string): Boolean;
 begin
   try
     CerrarDB;
-    if FileExists(aRuta + '.') then
+    if DirectoryExists(aRuta) then
       dbA2.Directory := aRuta
     else
       dbA2.Directory := RutaEjecucion + aRuta;

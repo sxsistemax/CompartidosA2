@@ -4139,40 +4139,35 @@ object dmAdministrativo: TdmAdministrativo
     object tbCostosCostoReferencia: TFloatField
       FieldName = 'CostoReferencia'
     end
+    object tbCostosCodigo: TStringField
+      FieldName = 'Codigo'
+      Size = 30
+    end
+  end
+  object DataSource1: TDataSource
+    AutoEdit = False
+    DataSet = tbCostos
+    Left = 400
+    Top = 384
   end
   object tbPrecios: TJvMemoryData
     FieldDefs = <>
-    Left = 176
+    Left = 264
     Top = 408
-    object tbPreciosPorentajeUtilidad: TBooleanField
-      FieldKind = fkCalculated
-      FieldName = 'PorentajeUtilidad'
-      OnGetText = GetCosto
-      Calculated = True
+    object tbPreciosPorcentajeUtilidad: TBooleanField
+      FieldName = 'PorcentajeUtilidad'
     end
-    object tbPreciosPorentajeUtilidadEx: TBooleanField
-      FieldKind = fkCalculated
-      FieldName = 'PorentajeUtilidadEx'
-      OnGetText = GetCosto
-      Calculated = True
+    object tbPreciosPorcentajeUtilidadEx: TBooleanField
+      FieldName = 'PorcentajeUtilidadEx'
     end
     object tbPreciosUtilidad: TFloatField
-      FieldKind = fkCalculated
       FieldName = 'Utilidad'
-      OnGetText = GetCosto
-      Calculated = True
     end
     object tbPreciosUtilidadEx: TFloatField
-      FieldKind = fkCalculated
       FieldName = 'UtilidadEx'
-      OnGetText = GetCosto
-      Calculated = True
     end
     object tbPreciosSinImpuesto: TFloatField
-      FieldKind = fkCalculated
       FieldName = 'SinImpuesto'
-      OnGetText = GetCosto
-      Calculated = True
     end
     object tbPreciosMtoImpuesto1: TFloatField
       FieldName = 'MtoImpuesto1'
@@ -4181,25 +4176,649 @@ object dmAdministrativo: TdmAdministrativo
       FieldName = 'MtoImpuesto2'
     end
     object tbPreciosPrecio: TFloatField
-      FieldKind = fkCalculated
       FieldName = 'Precio'
-      OnGetText = GetCosto
-      Calculated = True
     end
     object tbPreciosPrecioEx: TFloatField
-      FieldKind = fkCalculated
       FieldName = 'PrecioEx'
-      OnGetText = GetCosto
-      Calculated = True
     end
     object tbPreciosTipoRound: TSmallintField
       FieldName = 'TipoRound'
     end
   end
-  object DataSource1: TDataSource
-    AutoEdit = False
-    DataSet = tbCostos
-    Left = 400
-    Top = 384
+  object SSistema: TDBISAMTable
+    DatabaseName = 'dbA2'
+    EngineVersion = '4.29 Build 1'
+    TableName = 'SSistema'
+    Left = 464
+    Top = 344
+    object SSistemaDUMMYKEY: TStringField
+      FieldName = 'DUMMYKEY'
+    end
+    object SSistemaNO_APARTADO: TIntegerField
+      FieldName = 'NO_APARTADO'
+    end
+    object SSistemaNO_FACTURA: TIntegerField
+      FieldName = 'NO_FACTURA'
+    end
+    object SSistemaNO_FACTURALOTE: TIntegerField
+      FieldName = 'NO_FACTURALOTE'
+    end
+    object SSistemaNO_PRESUPUESTO: TIntegerField
+      FieldName = 'NO_PRESUPUESTO'
+    end
+    object SSistemaNO_NOTAENTREGA: TIntegerField
+      FieldName = 'NO_NOTAENTREGA'
+    end
+    object SSistemaNO_PEDIDO: TIntegerField
+      FieldName = 'NO_PEDIDO'
+    end
+    object SSistemaNO_DEVOLUCION: TIntegerField
+      FieldName = 'NO_DEVOLUCION'
+    end
+    object SSistemaNO_TRANSFERENCIAS: TIntegerField
+      FieldName = 'NO_TRANSFERENCIAS'
+    end
+    object SSistemaNO_CARGOS: TIntegerField
+      FieldName = 'NO_CARGOS'
+    end
+    object SSistemaNO_DESCARGOS: TIntegerField
+      FieldName = 'NO_DESCARGOS'
+    end
+    object SSistemaNO_AJUSTESINV: TIntegerField
+      FieldName = 'NO_AJUSTESINV'
+    end
+    object SSistemaNO_RECIBOCAJA: TIntegerField
+      FieldName = 'NO_RECIBOCAJA'
+    end
+    object SSistemaNO_PLANILLA: TIntegerField
+      FieldName = 'NO_PLANILLA'
+    end
+    object SSistemaNO_NOTASCREDITO: TIntegerField
+      FieldName = 'NO_NOTASCREDITO'
+    end
+    object SSistemaNO_NOTASDEBITO: TIntegerField
+      FieldName = 'NO_NOTASDEBITO'
+    end
+    object SSistemaNO_NOTASCREDITOPROV: TIntegerField
+      FieldName = 'NO_NOTASCREDITOPROV'
+    end
+    object SSistemaNO_NOTASDEBITOPROV: TIntegerField
+      FieldName = 'NO_NOTASDEBITOPROV'
+    end
+    object SSistemaNO_CONSTANCIARETENCION: TIntegerField
+      FieldName = 'NO_CONSTANCIARETENCION'
+    end
+    object SSistemaNO_REQUISICION: TIntegerField
+      FieldName = 'NO_REQUISICION'
+    end
+    object SSistemaNO_SOLCOTIZA: TIntegerField
+      FieldName = 'NO_SOLCOTIZA'
+    end
+    object SSistemaNO_ORDENCOMPRA: TIntegerField
+      FieldName = 'NO_ORDENCOMPRA'
+    end
+    object SSistemaNO_COMPRAS: TIntegerField
+      FieldName = 'NO_COMPRAS'
+    end
+    object SSistemaNO_DEVOLUCIONCOMPRA: TIntegerField
+      FieldName = 'NO_DEVOLUCIONCOMPRA'
+    end
+    object SSistemaNO_NOTAENTREGAPROV: TIntegerField
+      FieldName = 'NO_NOTAENTREGAPROV'
+    end
+    object SSistemaNO_PRXSERIALIZACION: TIntegerField
+      FieldName = 'NO_PRXSERIALIZACION'
+    end
+    object SSistemaMESES_PRESUPUESTOS: TIntegerField
+      FieldName = 'MESES_PRESUPUESTOS'
+    end
+    object SSistemaMESES_PEDIDOS: TIntegerField
+      FieldName = 'MESES_PEDIDOS'
+    end
+    object SSistemaMESES_ORDENESCOMPRA: TIntegerField
+      FieldName = 'MESES_ORDENESCOMPRA'
+    end
+    object SSistemaIMPUESTO1: TStringField
+      FieldName = 'IMPUESTO1'
+      Size = 10
+    end
+    object SSistemaIMPUESTO2: TStringField
+      FieldName = 'IMPUESTO2'
+      Size = 10
+    end
+    object SSistemaMTO_IMPUESTO1: TCurrencyField
+      FieldName = 'MTO_IMPUESTO1'
+    end
+    object SSistemaMTO_IMPUESTO2: TCurrencyField
+      FieldName = 'MTO_IMPUESTO2'
+    end
+    object SSistemaACTIVAR_IMPUESTO1: TBooleanField
+      FieldName = 'ACTIVAR_IMPUESTO1'
+    end
+    object SSistemaACTIVAR_IMPUESTO2: TBooleanField
+      FieldName = 'ACTIVAR_IMPUESTO2'
+    end
+    object SSistemaSERIALES_POSTVENTA: TBooleanField
+      FieldName = 'SERIALES_POSTVENTA'
+    end
+    object SSistemaSUMARFLETEIMP1VENTAS: TBooleanField
+      FieldName = 'SUMARFLETEIMP1VENTAS'
+    end
+    object SSistemaSUMARFLETEIMP2VENTAS: TBooleanField
+      FieldName = 'SUMARFLETEIMP2VENTAS'
+    end
+    object SSistemaSUMARFLETEIMP1COMPRAS: TBooleanField
+      FieldName = 'SUMARFLETEIMP1COMPRAS'
+    end
+    object SSistemaSUMARFLETEIMP2COMPRAS: TBooleanField
+      FieldName = 'SUMARFLETEIMP2COMPRAS'
+    end
+    object SSistemaUTILIZARCTMOSVENTAS: TBooleanField
+      FieldName = 'UTILIZARCTMOSVENTAS'
+    end
+    object SSistemaTIEMPOCHEQUEUSUARIOS: TIntegerField
+      FieldName = 'TIEMPOCHEQUEUSUARIOS'
+    end
+    object SSistemaTIEMPOINACTIVOAPLICACION: TIntegerField
+      FieldName = 'TIEMPOINACTIVOAPLICACION'
+    end
+    object SSistemaBLOQUEODEUSUARIOS: TIntegerField
+      FieldName = 'BLOQUEODEUSUARIOS'
+    end
+    object SSistemaAPARIENCIA3D: TBooleanField
+      FieldName = 'APARIENCIA3D'
+    end
+    object SSistemaLONGITUDPASSWORD: TIntegerField
+      FieldName = 'LONGITUDPASSWORD'
+    end
+    object SSistemaPORCPRONTOPAGO: TCurrencyField
+      FieldName = 'PORCPRONTOPAGO'
+    end
+    object SSistemaDIASPRONTOPAGO: TIntegerField
+      FieldName = 'DIASPRONTOPAGO'
+    end
+    object SSistemaDECIMALESXDEFECTO: TIntegerField
+      FieldName = 'DECIMALESXDEFECTO'
+    end
+    object SSistemaSERIALES_POSTCOMPRA: TBooleanField
+      FieldName = 'SERIALES_POSTCOMPRA'
+    end
+    object SSistemaUTILIZARCTMOSCOMPRAS: TBooleanField
+      FieldName = 'UTILIZARCTMOSCOMPRAS'
+    end
+    object SSistemaREDONDEOVENTAS: TStringField
+      FieldName = 'REDONDEOVENTAS'
+      Size = 4
+    end
+    object SSistemaREDONDEOCOMPRAS: TStringField
+      FieldName = 'REDONDEOCOMPRAS'
+      Size = 4
+    end
+    object SSistemaMONEDA_DEFECTO: TStringField
+      FieldName = 'MONEDA_DEFECTO'
+      Size = 30
+    end
+    object SSistemaACTIVAR_SOMBRA: TBooleanField
+      FieldName = 'ACTIVAR_SOMBRA'
+    end
+    object SSistemaNOMBRE_PRECIO1: TStringField
+      FieldName = 'NOMBRE_PRECIO1'
+    end
+    object SSistemaNOMBRE_PRECIO2: TStringField
+      FieldName = 'NOMBRE_PRECIO2'
+    end
+    object SSistemaNOMBRE_PRECIO3: TStringField
+      FieldName = 'NOMBRE_PRECIO3'
+    end
+    object SSistemaNOMBRE_PRECIO4: TStringField
+      FieldName = 'NOMBRE_PRECIO4'
+    end
+    object SSistemaNOMBRE_PRECIO5: TStringField
+      FieldName = 'NOMBRE_PRECIO5'
+    end
+    object SSistemaNOMBRE_PRECIO6: TStringField
+      FieldName = 'NOMBRE_PRECIO6'
+    end
+    object SSistemaMTO_IMPUESTO1P: TBooleanField
+      FieldName = 'MTO_IMPUESTO1P'
+    end
+    object SSistemaMTO_IMPUESTO2P: TBooleanField
+      FieldName = 'MTO_IMPUESTO2P'
+    end
+    object SSistemaPORCPRONTOPAGOP: TBooleanField
+      FieldName = 'PORCPRONTOPAGOP'
+    end
+    object SSistemaAUTOCODECATEGORIA: TBooleanField
+      FieldName = 'AUTOCODECATEGORIA'
+    end
+    object SSistemaFILLCODECATEGORIA: TBooleanField
+      FieldName = 'FILLCODECATEGORIA'
+    end
+    object SSistemaAUTOCODEINVENTARIO: TBooleanField
+      FieldName = 'AUTOCODEINVENTARIO'
+    end
+    object SSistemaFILLCODEINVENTARIO: TBooleanField
+      FieldName = 'FILLCODEINVENTARIO'
+    end
+    object SSistemaAUTOCODEZONA: TBooleanField
+      FieldName = 'AUTOCODEZONA'
+    end
+    object SSistemaFILLCODEZONA: TBooleanField
+      FieldName = 'FILLCODEZONA'
+    end
+    object SSistemaAUTOCODECLIENTE: TBooleanField
+      FieldName = 'AUTOCODECLIENTE'
+    end
+    object SSistemaFILLCODECLIENTE: TBooleanField
+      FieldName = 'FILLCODECLIENTE'
+    end
+    object SSistemaAUTOCODEVENDEDOR: TBooleanField
+      FieldName = 'AUTOCODEVENDEDOR'
+    end
+    object SSistemaFILLCODEVENDEDOR: TBooleanField
+      FieldName = 'FILLCODEVENDEDOR'
+    end
+    object SSistemaAUTOCODEPROVEEDOR: TBooleanField
+      FieldName = 'AUTOCODEPROVEEDOR'
+    end
+    object SSistemaFILLCODEPROVEEDOR: TBooleanField
+      FieldName = 'FILLCODEPROVEEDOR'
+    end
+    object SSistemaAUTOCODECONCEPTO: TBooleanField
+      FieldName = 'AUTOCODECONCEPTO'
+    end
+    object SSistemaFILLCODECONCEPTO: TBooleanField
+      FieldName = 'FILLCODECONCEPTO'
+    end
+    object SSistemaAUTOCODEBENEFICIARIO: TBooleanField
+      FieldName = 'AUTOCODEBENEFICIARIO'
+    end
+    object SSistemaFILLCODEBENEFICIARIO: TBooleanField
+      FieldName = 'FILLCODEBENEFICIARIO'
+    end
+    object SSistemaPRXCODECATEGORIA: TFloatField
+      FieldName = 'PRXCODECATEGORIA'
+    end
+    object SSistemaPRXCODEINVENTARIO: TFloatField
+      FieldName = 'PRXCODEINVENTARIO'
+    end
+    object SSistemaPRXCODEZONAS: TFloatField
+      FieldName = 'PRXCODEZONAS'
+    end
+    object SSistemaPRXCODECLIENTE: TFloatField
+      FieldName = 'PRXCODECLIENTE'
+    end
+    object SSistemaPRXCODEVENDEDOR: TFloatField
+      FieldName = 'PRXCODEVENDEDOR'
+    end
+    object SSistemaPRXCODEPROVEEDOR: TFloatField
+      FieldName = 'PRXCODEPROVEEDOR'
+    end
+    object SSistemaPRXCODECONCEPTO: TFloatField
+      FieldName = 'PRXCODECONCEPTO'
+    end
+    object SSistemaPRXCODEBENEFICIARIO: TFloatField
+      FieldName = 'PRXCODEBENEFICIARIO'
+    end
+    object SSistemaDESCUENTOPRONTOPAGO: TBlobField
+      FieldName = 'DESCUENTOPRONTOPAGO'
+    end
+    object SSistemaINTERESMORA: TFloatField
+      FieldName = 'INTERESMORA'
+    end
+    object SSistemaKEYAPARTADO: TStringField
+      FieldName = 'KEYAPARTADO'
+      Size = 50
+    end
+    object SSistemaIDENTIDADFISCAL1: TStringField
+      FieldName = 'IDENTIDADFISCAL1'
+      Size = 50
+    end
+    object SSistemaIDENTIDADFISCAL2: TStringField
+      FieldName = 'IDENTIDADFISCAL2'
+      Size = 50
+    end
+    object SSistemaCOMISIONVENTASAFTERCANCEL: TBooleanField
+      FieldName = 'COMISIONVENTASAFTERCANCEL'
+    end
+    object SSistemaFECHA_INICIOPERIODO: TDateField
+      FieldName = 'FECHA_INICIOPERIODO'
+    end
+    object SSistemaFECHA_FINALPERIODO: TDateField
+      FieldName = 'FECHA_FINALPERIODO'
+    end
+    object SSistemaNAMEPERIODO: TStringField
+      FieldName = 'NAMEPERIODO'
+      Size = 30
+    end
+    object SSistemaDESCRIPCIONPERIODOS: TBlobField
+      FieldName = 'DESCRIPCIONPERIODOS'
+    end
+    object SSistemaESTADANO2000: TStringField
+      FieldName = 'ESTADANO2000'
+      Size = 30
+    end
+    object SSistemaESTADANO1999: TStringField
+      FieldName = 'ESTADANO1999'
+      Size = 30
+    end
+    object SSistemaESTADANO1998: TStringField
+      FieldName = 'ESTADANO1998'
+      Size = 30
+    end
+    object SSistemaFECHA_ULTIMAFACTURA: TDateField
+      FieldName = 'FECHA_ULTIMAFACTURA'
+    end
+    object SSistemaMONTO_ULTIMAFACTURA: TCurrencyField
+      FieldName = 'MONTO_ULTIMAFACTURA'
+    end
+    object SSistemaCANTIDAD_ULTIMAFACTURA: TCurrencyField
+      FieldName = 'CANTIDAD_ULTIMAFACTURA'
+    end
+    object SSistemaAJUSTEDETALLADO: TBooleanField
+      FieldName = 'AJUSTEDETALLADO'
+    end
+    object SSistemaIMP_DEBITOBANCARIO: TFloatField
+      FieldName = 'IMP_DEBITOBANCARIO'
+    end
+    object SSistemaUTILIDADENPORCENTAJE: TBooleanField
+      FieldName = 'UTILIDADENPORCENTAJE'
+    end
+    object SSistemaCERRARCUENTASXCOBRAR: TBooleanField
+      FieldName = 'CERRARCUENTASXCOBRAR'
+    end
+    object SSistemaCERRARCUENTASXPAGAR: TBooleanField
+      FieldName = 'CERRARCUENTASXPAGAR'
+    end
+    object SSistemaMESES_HISTORICO: TIntegerField
+      FieldName = 'MESES_HISTORICO'
+    end
+    object SSistemaNAMEAUTORIZADOS: TStringField
+      FieldName = 'NAMEAUTORIZADOS'
+      Size = 50
+    end
+    object SSistemaNAMEMATRICES: TStringField
+      FieldName = 'NAMEMATRICES'
+      Size = 50
+    end
+    object SSistemaNO_COMPROBANTEEGRESO: TIntegerField
+      FieldName = 'NO_COMPROBANTEEGRESO'
+    end
+    object SSistemaNO_COMPROBANTEDEBITO: TIntegerField
+      FieldName = 'NO_COMPROBANTEDEBITO'
+    end
+    object SSistemaNO_COMPROBANTEDEPOSITO: TIntegerField
+      FieldName = 'NO_COMPROBANTEDEPOSITO'
+    end
+    object SSistemaNO_COMPROBANTECREDITO: TIntegerField
+      FieldName = 'NO_COMPROBANTECREDITO'
+    end
+    object SSistemaDIASDIF_MISMOBANCO: TIntegerField
+      FieldName = 'DIASDIF_MISMOBANCO'
+    end
+    object SSistemaDIASDIF_OTROSBANCOS: TIntegerField
+      FieldName = 'DIASDIF_OTROSBANCOS'
+    end
+    object SSistemaDIASDIF_FUERAPLAZA: TIntegerField
+      FieldName = 'DIASDIF_FUERAPLAZA'
+    end
+    object SSistemaVERSION_UPDATE: TFloatField
+      FieldName = 'VERSION_UPDATE'
+    end
+    object SSistemaNAMEFLETEVENTA: TStringField
+      FieldName = 'NAMEFLETEVENTA'
+    end
+    object SSistemaNAMEFLETECOMPRA: TStringField
+      FieldName = 'NAMEFLETECOMPRA'
+    end
+    object SSistemaNAMEGIROS: TStringField
+      FieldName = 'NAMEGIROS'
+    end
+    object SSistemaNAMECOMISION: TStringField
+      FieldName = 'NAMECOMISION'
+    end
+    object SSistemaNAMECLASIFICACION: TStringField
+      FieldName = 'NAMECLASIFICACION'
+    end
+    object SSistemaNAMEPESO: TStringField
+      FieldName = 'NAMEPESO'
+    end
+    object SSistemaNAMEEXISTENCIA: TStringField
+      FieldName = 'NAMEEXISTENCIA'
+    end
+    object SSistemaMONTOFLETEDEFECTO: TFloatField
+      FieldName = 'MONTOFLETEDEFECTO'
+    end
+    object SSistemaSERIECREADAPOR: TStringField
+      FieldName = 'SERIECREADAPOR'
+    end
+    object SSistemaTIPOSERIE: TIntegerField
+      FieldName = 'TIPOSERIE'
+    end
+    object SSistemaNO_ORDENSERVICIO: TIntegerField
+      FieldName = 'NO_ORDENSERVICIO'
+    end
+    object SSistemaNO_GUIADESPACHO: TIntegerField
+      FieldName = 'NO_GUIADESPACHO'
+    end
+    object SSistemaSERIALESUNICOS: TBooleanField
+      FieldName = 'SERIALESUNICOS'
+    end
+    object SSistemaSERIALESXDEPOSITO: TBooleanField
+      FieldName = 'SERIALESXDEPOSITO'
+    end
+    object SSistemaNO_PEDIDOPENDIENTE: TIntegerField
+      FieldName = 'NO_PEDIDOPENDIENTE'
+    end
+    object SSistemaNO_LOCKRECORD: TBooleanField
+      FieldName = 'NO_LOCKRECORD'
+    end
+    object SSistemaNO_USEESTADISTICAS: TBooleanField
+      FieldName = 'NO_USEESTADISTICAS'
+    end
+    object SSistemaMAXTRANSBANCO: TIntegerField
+      FieldName = 'MAXTRANSBANCO'
+    end
+    object SSistemaNO_GRUPOGASTO: TStringField
+      FieldName = 'NO_GRUPOGASTO'
+      Size = 10
+    end
+    object SSistemaULTFECHACONTABINIT: TDateField
+      FieldName = 'ULTFECHACONTABINIT'
+    end
+    object SSistemaULTFECHACONTABFIN: TDateField
+      FieldName = 'ULTFECHACONTABFIN'
+    end
+    object SSistemaFORMATOFECHA: TSmallintField
+      FieldName = 'FORMATOFECHA'
+    end
+    object SSistemaNO_RETENCIONPROVEEDOR: TIntegerField
+      FieldName = 'NO_RETENCIONPROVEEDOR'
+    end
+    object SSistemaNO_RETENCIONESPECIAL: TIntegerField
+      FieldName = 'NO_RETENCIONESPECIAL'
+    end
+    object SSistemaCONTRIBUYENTE_ESPECIAL: TBooleanField
+      FieldName = 'CONTRIBUYENTE_ESPECIAL'
+    end
+    object SSistemaCLASIFICACION_RETENCION: TStringField
+      FieldName = 'CLASIFICACION_RETENCION'
+      Size = 10
+    end
+    object SSistemaPORCENT_ESPECIAL: TCurrencyField
+      FieldName = 'PORCENT_ESPECIAL'
+    end
+    object SSistemaNO_CONTROL: TIntegerField
+      FieldName = 'NO_CONTROL'
+    end
+    object SSistemaUNASOLARETENCION: TBooleanField
+      FieldName = 'UNASOLARETENCION'
+    end
+    object SSistemaNO_CONSECUTIVO: TIntegerField
+      FieldName = 'NO_CONSECUTIVO'
+    end
+    object SSistemaMODO_IVA: TStringField
+      FieldName = 'MODO_IVA'
+      Size = 5
+    end
+    object SSistemaDECIMALES_CANTIDAD: TIntegerField
+      FieldName = 'DECIMALES_CANTIDAD'
+    end
+    object SSistemaCLASIFICACION_RETENCION_CLIENT: TStringField
+      FieldName = 'CLASIFICACION_RETENCION_CLIENT'
+      Size = 10
+    end
+    object SSistemaACTIVAR_CODIGOUNICO: TBooleanField
+      FieldName = 'ACTIVAR_CODIGOUNICO'
+    end
+    object SSistemaNAMENDCLIENTE: TStringField
+      FieldName = 'NAMENDCLIENTE'
+    end
+    object SSistemaNAMENDPROVEEDOR: TStringField
+      FieldName = 'NAMENDPROVEEDOR'
+    end
+    object SSistemaNAMENCCLIENTE: TStringField
+      FieldName = 'NAMENCCLIENTE'
+    end
+    object SSistemaNAMENCPROVEEDOR: TStringField
+      FieldName = 'NAMENCPROVEEDOR'
+    end
+    object SSistemaABRENDCLIENTE: TStringField
+      FieldName = 'ABRENDCLIENTE'
+    end
+    object SSistemaABRENDPROVEEDOR: TStringField
+      FieldName = 'ABRENDPROVEEDOR'
+    end
+    object SSistemaABRENCCLIENTE: TStringField
+      FieldName = 'ABRENCCLIENTE'
+    end
+    object SSistemaABRENCPROVEEDOR: TStringField
+      FieldName = 'ABRENCPROVEEDOR'
+    end
+    object SSistemaCIERRE_DONE: TBooleanField
+      FieldName = 'CIERRE_DONE'
+    end
+    object SSistemaTIPOCOSTO: TStringField
+      FieldName = 'TIPOCOSTO'
+      Size = 10
+    end
+    object SSistemaVIGENCIA_CARNET: TIntegerField
+      FieldName = 'VIGENCIA_CARNET'
+    end
+    object SSistemaACTIVE_CUENTASC: TBooleanField
+      FieldName = 'ACTIVE_CUENTASC'
+    end
+    object SSistemaACTIVE_CUENTASP: TBooleanField
+      FieldName = 'ACTIVE_CUENTASP'
+    end
+    object SSistemaMONEDA_REFERENCIA: TStringField
+      FieldName = 'MONEDA_REFERENCIA'
+      Size = 30
+    end
+    object SSistemaREDONDEOIVA_VENTAS: TBooleanField
+      FieldName = 'REDONDEOIVA_VENTAS'
+    end
+    object SSistemaREDONDEOIVA_COMPRAS: TBooleanField
+      FieldName = 'REDONDEOIVA_COMPRAS'
+    end
+    object SSistemaBLOCKAUTODROP: TBooleanField
+      FieldName = 'BLOCKAUTODROP'
+    end
+    object SSistemaNAME_DETALLE: TStringField
+      FieldName = 'NAME_DETALLE'
+      Size = 50
+    end
+    object SSistemaNO_RECIBOCAJACHICA: TIntegerField
+      FieldName = 'NO_RECIBOCAJACHICA'
+    end
+    object SSistemaNO_ORDENPAGO: TIntegerField
+      FieldName = 'NO_ORDENPAGO'
+    end
+    object SSistemaCLASIFICACION_CARGOS: TStringField
+      FieldName = 'CLASIFICACION_CARGOS'
+      Size = 10
+    end
+    object SSistemaCLASIFICACION_DESCARGOS: TStringField
+      FieldName = 'CLASIFICACION_DESCARGOS'
+      Size = 10
+    end
+    object SSistemaIGUALARCORRELATIVO: TBooleanField
+      FieldName = 'IGUALARCORRELATIVO'
+    end
+    object SSistemaMODORETENCIONVENTA: TBooleanField
+      FieldName = 'MODORETENCIONVENTA'
+    end
+    object SSistemaMODORETENCIONCOMPRA: TBooleanField
+      FieldName = 'MODORETENCIONCOMPRA'
+    end
+    object SSistemaNO_ORDENENSAMBLE: TIntegerField
+      FieldName = 'NO_ORDENENSAMBLE'
+    end
+    object SSistemaDEPOSITO_ENSAMBLE: TStringField
+      FieldName = 'DEPOSITO_ENSAMBLE'
+      Size = 10
+    end
+    object SSistemaDEPOSITO_ENSAMBLETRANSITO: TStringField
+      FieldName = 'DEPOSITO_ENSAMBLETRANSITO'
+      Size = 10
+    end
+    object SSistemaCLASIFICA_ENSAMBLECARGO: TStringField
+      FieldName = 'CLASIFICA_ENSAMBLECARGO'
+      Size = 10
+    end
+    object SSistemaCLASIFICA_ENSAMBLEDESCARGO: TStringField
+      FieldName = 'CLASIFICA_ENSAMBLEDESCARGO'
+      Size = 10
+    end
+    object SSistemaCLASIFICA_ENSAMBLETRASLADO: TStringField
+      FieldName = 'CLASIFICA_ENSAMBLETRASLADO'
+      Size = 10
+    end
+    object SSistemaIGUALARCORRELATIVOCOMPRA: TBooleanField
+      FieldName = 'IGUALARCORRELATIVOCOMPRA'
+    end
+    object SSistemaMOSTRARALLDEPOSITOS: TBooleanField
+      FieldName = 'MOSTRARALLDEPOSITOS'
+    end
+    object SSistemaUNIDAD_TRIBUTARIA: TCurrencyField
+      FieldName = 'UNIDAD_TRIBUTARIA'
+    end
+    object SSistemaESTADO_NAME: TStringField
+      FieldName = 'ESTADO_NAME'
+      Size = 50
+    end
+    object SSistemaESTADO_VALUE: TStringField
+      FieldName = 'ESTADO_VALUE'
+      Size = 10
+    end
+    object SSistemaCIUDAD_NAME: TStringField
+      FieldName = 'CIUDAD_NAME'
+      Size = 50
+    end
+    object SSistemaCIUDAD_VALUE: TStringField
+      FieldName = 'CIUDAD_VALUE'
+      Size = 10
+    end
+    object SSistemaMUNICIPIO_NAME: TStringField
+      FieldName = 'MUNICIPIO_NAME'
+      Size = 50
+    end
+    object SSistemaMUNICIPIO_VALUE: TStringField
+      FieldName = 'MUNICIPIO_VALUE'
+      Size = 10
+    end
+    object SSistemaTIPO_PERSONAJURIDICA: TStringField
+      FieldName = 'TIPO_PERSONAJURIDICA'
+      Size = 10
+    end
+    object SSistemaNO_CAUSACION: TIntegerField
+      FieldName = 'NO_CAUSACION'
+    end
+    object SSistemaNO_CAJACHICA: TIntegerField
+      FieldName = 'NO_CAJACHICA'
+    end
+    object SSistemaTIPO_CONVENIOVALIDA: TSmallintField
+      FieldName = 'TIPO_CONVENIOVALIDA'
+    end
   end
 end

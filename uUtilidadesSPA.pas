@@ -12,16 +12,22 @@ type
     toiFacturas, toiDevoluciónVentas, toiNotasEntregasVentas,
     toiApartados, toiOrdenesServicios );
 
+  tClasificionInventario = ( tciProductos, tciServicios, tciProductosCompuestos, tciEnsamblados);
+
+  tManejoInventario = (tmiCostoPromedio, tmiCostoxLotes, tmiMateriales);
+
 var
   OpcionA2 : Integer;
   ParametroA2 : string;
   ModoPruebas : Boolean;
+  ModoDemo : Boolean = False;
   IdApliacion : string;
 
-function OpcionParametro : integer;
+procedure OpcionParametro(Opcion : integer = 0);
 procedure GuardarConfiguracion( aClave, aValor : String);
 function LeerConfiguracion( aClave : string): string;
 function NombreAplicacion : string;
+function NombreComputador : string;
 
 
 implementation
@@ -30,13 +36,20 @@ Uses Dialogs, SysUtils, IniFiles, Registry;
 
 // Retorna el numero de la opcion para ser ejecutado, si el parametro de ejecucion
 // no es válido debe retornar 0
-function OpcionParametro : integer;
+procedure OpcionParametro(Opcion : integer = 0);
 Begin
   ParametroA2 := '';
   OpcionA2 := 0;
   ModoPruebas := False;
 
-  OpcionParametro := 0;
+  if ( Opcion <> 0) and (ParamCount = 0) then
+  begin
+    OpcionA2 := Opcion;
+    Exit;
+  end;
+
+
+
 
   if ParamCount <= 0  then
   begin
@@ -101,6 +114,12 @@ begin
   s := ChangeFileExt(ExtractFileName( ParamStr(0)), '');
   s := Copy( s, 1, Length(s));
   result := S;
+end;
+
+function NombreComputador : string;
+begin
+  // To-Do
+  Result := 'Prueba';
 end;
 
 end.
