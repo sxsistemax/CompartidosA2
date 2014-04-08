@@ -1055,7 +1055,7 @@ var
   I : integer;
 begin
   S := aTabla.CreateBlobStream(aCampo, bmWrite) ;
-  I := 1;
+  I := 0;
 
   tbFormaPago.First;
   while not tbFormaPago.Eof do

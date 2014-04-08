@@ -48,9 +48,6 @@ Begin
     Exit;
   end;
 
-
-
-
   if ParamCount <= 0  then
   begin
     ShowMessage('No se puede ejecutar este archivo desde la linea de comandos');
